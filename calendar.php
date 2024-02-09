@@ -33,6 +33,10 @@ SOFTWARE.
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap');
 @import url('https://rsms.me/inter/inter.css');
+
+setlocale(LC_TIME, 'fr_FR');
+date_default_timezone_set('Europe/Paris');
+
 @media print {
 	#info {
 		display: none;
