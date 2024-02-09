@@ -34,9 +34,6 @@ SOFTWARE.
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap');
 @import url('https://rsms.me/inter/inter.css');
 
-setlocale(LC_TIME, 'fr_FR');
-date_default_timezone_set('Europe/Paris');
-
 @media print {
 	#info {
 		display: none;
@@ -124,7 +121,12 @@ p {
 <p style="font-size: 80%; color: #999;">Made by <a href="https://neatnik.net/">Neatnik</a> &#183; Source on <a href="https://github.com/neatnik/calendar">GitHub</a></p>
 </div>
 <?php
-date_default_timezone_set('UTC');
+
+
+setlocale(LC_TIME, 'fr_FR');
+date_default_timezone_set('Europe/Paris');
+//date_default_timezone_set('UTC');
+
 $now = isset($_REQUEST['year']) ? strtotime($_REQUEST['year'].'-01-01') : time();
 $dates = array();
 $month = 1;
