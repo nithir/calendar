@@ -137,7 +137,9 @@ echo '<thead>';
 echo '<tr>';
 // Add the month headings
 for($i = 1; $i <= 12; $i++) {
-	echo '<th>'.DateTime::createFromFormat('!m', $i)->format('M').'</th>';
+    $date = $i;
+    $datefmt = new IntlDateFormatter('fr_FR', NULL, NULL, NULL, NULL, 'LLL');
+    echo '<th>'.$datefmt->format(DateTime::createFromFormat('!m', $date)).'</th>';
 }
 echo '</tr>';
 echo '</thead>';
