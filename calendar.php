@@ -172,7 +172,6 @@ while($month <= 12) {
 			// Ensure that we have a valid date
 			if($day > cal_days_in_month(CAL_GREGORIAN, $month, date('Y', $now))) {
 				$dates[$month][$x] = 0;
-				
 			}
 			else {
 				$dates[$month][$x] = $day;
@@ -198,7 +197,6 @@ if(isset($_REQUEST['layout']) && $_REQUEST['layout'] == 'aligned-weekdays') {
 				echo '<td></td>';
 			}
 			else {
-				
 				$date = date('Y', $now).'-'.str_pad($month, 2, '0', STR_PAD_LEFT).'-'.str_pad($dates[$month][$day], 2, '0', STR_PAD_LEFT);
 				if(date('N', strtotime($date)) == '7') {
 					echo '<td class="weekend">';
@@ -237,8 +235,12 @@ else {
 			else {
 				echo '<td>';
 			}
-			// Display the day number and day of the week
-			echo '<span class="date">'.$day.'</span> <span class="day">'.substr(DateTime::createFromFormat('!Y-m-d', date('Y', $now).'-'.$month.'-'.$day)->format('D'), 0, 1).'</span>';
+                        // Display the day number and day of the week
+                        $date = $day.'/'.$month.'/'.date('Y', $now);
+                        $datefmt = new IntlDateFormatter('fr_FR', NULL, NULL, NULL, NULL, 'EEEE dd LLLL yyyy');
+                        $lettre_du_jour = substr($datefmt->format(DateTime::createFromFormat('d/m/Y', $date)),0,1);
+			#echo '<span class="date">'.$day.'</span> <span class="day">'.substr(DateTime::createFromFormat('!Y-m-d', date('Y', $now).'-'.$month.'-'.$day)->format('D'), 0, 1).'</span>';
+			echo '<span class="date">'.$day.'</span> <span class="day">'.$lettre_du_jour.'</span>';
 			echo '</td>';
 			$month++;
 		}
