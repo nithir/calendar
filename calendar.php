@@ -122,9 +122,10 @@ p {
 </div>
 <?php
 
+$LOCALE = isset($_REQUEST['locale']) ? $_REQUEST['locale'] : 'fr_FR';
 
-setlocale(LC_TIME, 'fr_FR');
-date_default_timezone_set('Europe/Paris');
+setlocale(LC_TIME, $LOCALE);
+//date_default_timezone_set('Europe/Paris');
 //date_default_timezone_set('UTC');
 
 $now = isset($_REQUEST['year']) ? strtotime($_REQUEST['year'].'-01-01') : time();
@@ -138,7 +139,7 @@ echo '<tr>';
 // Add the month headings
 for($i = 1; $i <= 12; $i++) {
     $date = $i;
-    $datefmt = new IntlDateFormatter('fr_FR', NULL, NULL, NULL, NULL, 'LLL');
+    $datefmt = new IntlDateFormatter($LOCALE, NULL, NULL, NULL, NULL, 'LLL');
     echo '<th>'.$datefmt->format(DateTime::createFromFormat('!m', $date)).'</th>';
 }
 echo '</tr>';
@@ -237,7 +238,7 @@ else {
 			}
                         // Display the day number and day of the week
                         $date = $day.'/'.$month.'/'.date('Y', $now);
-                        $datefmt = new IntlDateFormatter('fr_FR', NULL, NULL, NULL, NULL, 'EEEE dd LLLL yyyy');
+                        $datefmt = new IntlDateFormatter($LOCALE, NULL, NULL, NULL, NULL, 'EEEE dd LLLL yyyy');
                         $lettre_du_jour = substr($datefmt->format(DateTime::createFromFormat('d/m/Y', $date)),0,1);
 			#echo '<span class="date">'.$day.'</span> <span class="day">'.substr(DateTime::createFromFormat('!Y-m-d', date('Y', $now).'-'.$month.'-'.$day)->format('D'), 0, 1).'</span>';
 			echo '<span class="date">'.$day.'</span> <span class="day">'.$lettre_du_jour.'</span>';
